@@ -25,6 +25,12 @@ async def run_turn(provider: BaseProvider, turn: Turn, record: RunRecord) -> dic
     await provider.connect()
     t_audio_start = now_ms()
 
+    # Offline stubs echo the reference so the harness path is testable
+    # without keys; real vendors ignore this hook.
+    set_ref = getattr(provider, "set_reference", None)
+    if callable(set_ref):
+        set_ref(turn.reference)
+
     final_text = ""
     t_first_token: float | None = None
     queue: asyncio.Queue[TranscriptEvent | None] = asyncio.Queue()
