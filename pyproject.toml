@@ -1,0 +1,40 @@
+[project]
+name = "voicebench"
+version = "0.1.0"
+description = "Open-source, fully automated benchmarks for realtime speech AI: streaming STT and end-to-end voice-agent pipelines."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [{ name = "Erzy-Inc" }]
+dependencies = [
+    "httpx>=0.27",
+    "jiwer>=3.0",
+    "numpy>=1.26",
+    "pydantic>=2.7",
+    "pyyaml>=6.0",
+    "rich>=13.7",
+    "websockets>=12.0",
+]
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.23", "mypy>=1.10", "ruff>=0.4"]
+audio = ["soundfile>=0.12", "librosa>=0.10"]
+[project.scripts]
+voicebench = "voicebench.cli:main"
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+[tool.hatch.build.targets.wheel]
+packages = ["src/voicebench"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+# Benchmark harness deliberately uses broad excepts at I/O boundaries and
+# class-level mutable config; strictness lives in tests, not adapters.
+ignore = ["BLE001", "RUF012", "S110", "UP031"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

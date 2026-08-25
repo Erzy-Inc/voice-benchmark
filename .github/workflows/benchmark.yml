@@ -1,0 +1,82 @@
+name: benchmark
+
+# Fully automated: nightly runs execute the harness against every configured
+# provider, regenerate LEADERBOARD.md + site data, and publish to GitHub Pages.
+on:
+  schedule:
+    - cron: "0 6 * * *" # daily 06:00 UTC
+  workflow_dispatch:
+    inputs:
+      track:
+        description: "Track to run"
+        default: stt
+        type: choice
+        options: [stt, e2e]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  smoke:
+    name: Offline harness tests (no keys)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -e ".[dev]"
+      - run: python -m voicebench.seed
+      - run: pytest -q
+
+  benchmark:
+    name: Vendor benchmarks (nightly)
+    runs-on: ubuntu-latest
+    needs: smoke
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -e ".[dev]"
+      - run: python -m voicebench.seed
+      - name: Run all configured providers
+        env:
+          DEEPGRAM_API_KEY: ${{ secrets.DEEPGRAM_API_KEY }}
+          ASSEMBLYAI_API_KEY: ${{ secrets.ASSEMBLYAI_API_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SONIOX_API_KEY: ${{ secrets.SONIOX_API_KEY }}
+          CARTESIA_API_KEY: ${{ secrets.CARTESIA_API_KEY }}
+        run: voicebench run --track ${{ github.event.inputs.track || 'stt' }} --all
+      - name: Rebuild leaderboard + site data
+        run: voicebench report
+      - name: Commit results
+        run: |
+          git config user.name "benchmark-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add results/ LEADERBOARD.md site/
+          git diff --cached --quiet || git commit -m "bench: automated run $(date -u +%F)"
+          git push
+
+  deploy-site:
+    name: Publish leaderboard site
+    needs: benchmark
+    if: always() && !cancelled() && needs.benchmark.result != 'failure'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4

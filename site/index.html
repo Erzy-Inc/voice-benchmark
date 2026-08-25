@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>voice-benchmark — realtime speech AI leaderboard</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+         max-width: 960px; margin: 0 auto; padding: 2rem 1rem; line-height: 1.5; }
+  h1 { font-size: 1.6rem; } h2 { font-size: 1.15rem; margin-top: 2rem; }
+  table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+  th, td { text-align: left; padding: .45rem .6rem; border-bottom: 1px solid color-mix(in srgb, currentColor 15%, transparent); }
+  th { font-weight: 600; font-size: .85rem; }
+  td.num, th.num { text-align: right; }
+  .best { font-weight: 700; }
+  footer { margin-top: 3rem; font-size: .85rem; opacity: .7; }
+</style>
+</head>
+<body>
+<h1>voice-benchmark</h1>
+<p>Fully automated leaderboard for realtime speech AI. Every number is produced
+by a scheduled CI run against live vendor endpoints — see
+<a href="https://github.com/Erzy-Inc/voice-benchmark">the repo</a> and
+<a href="https://github.com/Erzy-Inc/voice-benchmark/blob/main/docs/METHODOLOGY.md">methodology</a>.</p>
+
+<h2>Realtime STT</h2>
+<table id="board">
+  <thead>
+    <tr>
+      <th>#</th><th>Provider</th>
+      <th class="num">WER ↓</th>
+      <th class="num">Finalize p50 ↓</th><th class="num">Finalize p90 ↓</th>
+      <th class="num">TTFT p50 ↓</th><th class="num">TTFT p90 ↓</th>
+      <th class="num">Cost / 1k min ↓</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<footer>Auto-generated from <code>site/data/leaderboard.json</code> by the
+<code>benchmark</code> workflow. Do not edit numbers by hand.</footer>
+
+<script>
+(async () => {
+  const tbody = document.querySelector("#board tbody");
+  try {
+    const rows = await fetch("./data/leaderboard.json").then(r => r.json());
+    const mins = (key) => Math.min(...rows.map(r => r[key]).filter(v => v != null));
+    for (const [i, r] of rows.entries()) {
+      const tr = document.createElement("tr");
+      const cell = (v, suffix = "", key = null) => {
+        const td = document.createElement("td");
+        td.className = "num";
+        if (key && v != null && v === mins(key)) td.classList.add("best");
+        td.textContent = v == null ? "—" : `${v}${suffix}`;
+        return td;
+      };
+      tr.append(
+        Object.assign(document.createElement("td"), { textContent: i + 1 }),
+        Object.assign(document.createElement("td"), { textContent: r.provider_id }),
+        cell(r.wer, "%", "wer"),
+        cell(r.finalize_p50_ms, "ms", "finalize_p50_ms"),
+        cell(r.finalize_p90_ms),
+        cell(r.ttft_p50_ms, "ms"),
+        cell(r.ttft_p90_ms),
+        cell(r.cost_per_1k_min_usd ? `$${r.cost_per_1k_min_usd.toFixed(2)}` : null),
+      );
+      tbody.append(tr);
+    }
+  } catch {
+    tbody.innerHTML =
+      `<tr><td colspan="8">No results yet — waiting for the first scheduled run.
+       Trigger one with <em>Actions → benchmark → Run workflow</em>.</td></tr>`;
+  }
+})();
+</script>
+</body>
+</html>

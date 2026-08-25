@@ -1,0 +1,31 @@
+id: core-en-synth-v1
+language: en-US
+sample_rate_hz: 16000
+encoding: pcm_s16le
+provenance:
+  generator: voicebench.datasets.seed (synthetic tones)
+turns:
+- id: turn_001
+  audio: audio/turn_001.wav
+  reference: references/turn_001.txt
+- id: turn_002
+  audio: audio/turn_002.wav
+  reference: references/turn_002.txt
+- id: turn_003
+  audio: audio/turn_003.wav
+  reference: references/turn_003.txt
+- id: turn_004
+  audio: audio/turn_004.wav
+  reference: references/turn_004.txt
+- id: turn_005
+  audio: audio/turn_005.wav
+  reference: references/turn_005.txt
+- id: turn_006
+  audio: audio/turn_006.wav
+  reference: references/turn_006.txt
+- id: turn_007
+  audio: audio/turn_007.wav
+  reference: references/turn_007.txt
+- id: turn_008
+  audio: audio/turn_008.wav
+  reference: references/turn_008.txt

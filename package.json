@@ -1,0 +1,22 @@
+{
+  "name": "@erzy-inc/voice-benchmark",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "TypeScript SDK for running voice-benchmark tracks",
+  "scripts": {
+    "run": "tsx src/ts/run.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "ws": "^8.17"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/ws": "^8",
+    "tsx": "^4",
+    "typescript": "^5.5",
+    "vitest": "^2"
+  }
+}
