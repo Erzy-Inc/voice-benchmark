@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "provider_id": "deepgram-nova-3",
+    "wer": 100.0,
+    "finalize_p50_ms": null,
+    "finalize_p90_ms": null,
+    "ttft_p50_ms": null,
+    "ttft_p90_ms": null,
+    "cost_per_1k_min_usd": 4.3,
+    "runs": 1,
+    "n_turns": 8
+  }
+]
