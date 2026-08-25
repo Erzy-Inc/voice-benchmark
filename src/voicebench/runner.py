@@ -15,8 +15,9 @@ from .timing import RunRecord, now_ms
 
 RESULTS_DIR = Path(__file__).resolve().parents[2] / "results"
 
-# Realistic streaming cadence: 40ms of 16kHz mono s16le audio per chunk.
-CHUNK_MS = 40
+# Streaming cadence: 100ms frames of 16kHz mono s16le audio — within every
+# vendor's accepted input-chunk window (e.g. AssemblyAI requires 50-1000ms).
+CHUNK_MS = 100
 SAMPLE_RATE = 16000
 BYTES_PER_MS = SAMPLE_RATE * 2 / 1000
 

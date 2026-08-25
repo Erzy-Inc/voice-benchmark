@@ -36,7 +36,10 @@ class CartesiaInk(BaseProvider):
         self._events: asyncio.Queue[TranscriptEvent | None] = asyncio.Queue()
         self._ws = await websockets.connect(
             CARTESIA_WS,
-            additional_headers={"X-API-Key": os.environ["CARTESIA_API_KEY"]},
+            additional_headers={
+                "X-API-Key": os.environ["CARTESIA_API_KEY"],
+                "Cartesia-Version": "2026-08-14",
+            },
             max_size=None,
         )
         self._recv_task = asyncio.create_task(self._pump())

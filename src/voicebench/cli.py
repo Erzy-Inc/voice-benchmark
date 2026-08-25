@@ -46,7 +46,12 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"skip {pid}: missing {provider.required_env}", file=sys.stderr)
                 continue
             print(f"▶ running {pid} on {args.dataset} ...")
-            result = asyncio.run(run_provider(provider, args.dataset, track=args.track))
+            try:
+                result = asyncio.run(run_provider(provider, args.dataset, track=args.track))
+            except Exception as e:
+                # One vendor failing must not kill the other vendors' runs.
+                print(f"  ✗ {pid} FAILED: {type(e).__name__}: {e}", file=sys.stderr)
+                continue
             print(f"  summary: {result['summary']}")
             print(f"  saved:   {result['results_file']}")
         return 0

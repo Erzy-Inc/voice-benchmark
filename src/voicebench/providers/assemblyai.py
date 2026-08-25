@@ -17,7 +17,7 @@ from collections.abc import AsyncIterator
 from .base import BaseProvider, TranscriptEvent
 
 STREAM_URL = (
-    "wss://api.assemblyai.com/v3/stream"
+    "wss://streaming.assemblyai.com/v3/ws"
     "?sample_rate=16000&speech_model=universal-3-5-pro"
 )
 
