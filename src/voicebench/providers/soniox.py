@@ -20,6 +20,9 @@ from .base import BaseProvider, TranscriptEvent
 
 SONIOX_WS = "wss://stt-rt.soniox.com/transcribe-websocket"
 
+# Bounded wait for post-flush finals; the runner watchdog is the backstop.
+GRACE_SECONDS = 5.0
+
 
 class SonioxSTTRTV5(BaseProvider):
     provider_id = "soniox-stt-rt-v5"
@@ -80,10 +83,15 @@ class SonioxSTTRTV5(BaseProvider):
 
     async def finalize(self) -> AsyncIterator[TranscriptEvent]:
         # Empty text frame signals end-of-audio; endpoint detection then
-        # flushes all remaining non-final tokens as final.
+        # flushes all remaining non-final tokens as final. The server closes
+        # with `finished` after the flush; if it never does, the grace timer
+        # below ends the turn instead of hanging forever.
         await self._ws.send("")
         while True:
-            ev = await self._events.get()
+            try:
+                ev = await asyncio.wait_for(self._events.get(), timeout=GRACE_SECONDS)
+            except TimeoutError:
+                return
             if ev is None:
                 return
             yield ev

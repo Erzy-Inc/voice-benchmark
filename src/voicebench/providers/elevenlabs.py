@@ -28,6 +28,7 @@ STREAM_URL = (
 # Trailing room-tone sent during finalize so the vendor's VAD sees the caller
 # stop — mirrors what production streams contain after an utterance.
 TRAILING_SILENCE_CHUNKS = 14  # x 50ms = 700ms
+GRACE_SECONDS = 2.0  # no terminal event in this API; bounded wait for commits
 
 
 class ElevenLabsScribeV2Realtime(BaseProvider):
@@ -91,8 +92,13 @@ class ElevenLabsScribeV2Realtime(BaseProvider):
             with contextlib.suppress(Exception):
                 await self._send_b64(silence)
             await asyncio.sleep(0.05)
+        # This API has no terminal server event — the socket just stays open.
+        # Wait a bounded grace period for VAD commits, then conclude the turn.
         while True:
-            ev = await self._events.get()
+            try:
+                ev = await asyncio.wait_for(self._events.get(), timeout=GRACE_SECONDS)
+            except TimeoutError:
+                return
             if ev is None:
                 return
             yield ev

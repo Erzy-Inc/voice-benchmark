@@ -67,8 +67,17 @@ async def run_turn(provider: BaseProvider, turn: Turn, record: RunRecord) -> dic
 
     t_finalized: float | None = None
     t_silence: float | None = None
+    # Watchdog: a turn must conclude within audio duration + budget. Protects
+    # CI from any adapter whose finalize can hang indefinitely.
+    TURN_BUDGET_S = (len(pcm) / (SAMPLE_RATE * 2)) + 60.0
     while True:
-        ev = await queue.get()
+        try:
+            ev = await asyncio.wait_for(queue.get(), timeout=TURN_BUDGET_S)
+        except TimeoutError:
+            feed_task.cancel()
+            with contextlib.suppress(asyncio.CancelledError):
+                await feed_task
+            break
         if ev is None:
             break
         if isinstance(ev, tuple):  # silence marker from feeder
