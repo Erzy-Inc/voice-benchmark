@@ -1,0 +1,82 @@
+{
+  "provider_id": "elevenlabs-scribe-v2-realtime",
+  "dataset_id": "core-en-synth-v1",
+  "track": "stt",
+  "started_at_utc": "2026-08-29T12:09:35+00:00",
+  "harness_version": "0.1.0",
+  "dataset_git_sha": "e4062bbb18be",
+  "turns": [
+    {
+      "turn_id": "turn_001",
+      "reference": "The quick brown fox jumps over the lazy dog",
+      "transcript": "",
+      "wer": 1.0,
+      "ttft_ms": null,
+      "finalize_ms": null,
+      "tags": []
+    },
+    {
+      "turn_id": "turn_002",
+      "reference": "Welcome to ErzyCall how can I help you today",
+      "transcript": "",
+      "wer": 1.0,
+      "ttft_ms": null,
+      "finalize_ms": null,
+      "tags": []
+    },
+    {
+      "turn_id": "turn_003",
+      "reference": "Please hold while I transfer your call to the billing department",
+      "transcript": "",
+      "wer": 1.0,
+      "ttft_ms": null,
+      "finalize_ms": null,
+      "tags": []
+    },
+    {
+      "turn_id": "turn_004",
+      "reference": "Your appointment is confirmed for Tuesday March fourth at ten thirty",
+      "transcript": "",
+      "wer": 1.0,
+      "ttft_ms": null,
+      "finalize_ms": null,
+      "tags": []
+    },
+    {
+      "turn_id": "turn_005",
+      "reference": "I need to reschedule my delivery to the downtown office",
+      "transcript": "",
+      "wer": 1.0,
+      "ttft_ms": null,
+      "finalize_ms": null,
+      "tags": []
+    },
+    {
+      "turn_id": "turn_006",
+      "reference": "Can you repeat the total amount due on this invoice",
+      "transcript": "",
+      "wer": 1.0,
+      "ttft_ms": null,
+      "finalize_ms": null,
+      "tags": []
+    },
+    {
+      "turn_id": "turn_007",
+      "reference": "Thank you for calling have a great day",
+      "transcript": "",
+      "wer": 1.0,
+      "ttft_ms": null,
+      "finalize_ms": null,
+      "tags": []
+    },
+    {
+      "turn_id": "turn_008",
+      "reference": "My phone number is five five five zero one two three",
+      "transcript": "",
+      "wer": 1.0,
+      "ttft_ms": null,
+      "finalize_ms": null,
+      "tags": []
+    }
+  ]
+}
