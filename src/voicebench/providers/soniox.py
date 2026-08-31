@@ -68,7 +68,9 @@ class SonioxSTTRTV5(BaseProvider):
                     if t.get("is_final") and t.get("text")
                 ]
                 if finals:
-                    self._events.put_nowait(TranscriptEvent.now("final", " ".join(finals)))
+                    # Soniox emits subword tokens; they already carry their own
+                    # spacing — join directly, never with added spaces.
+                    self._events.put_nowait(TranscriptEvent.now("final", "".join(finals)))
                 if msg.get("finished"):
                     break
         except Exception:

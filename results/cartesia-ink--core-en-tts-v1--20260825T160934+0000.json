@@ -1,0 +1,82 @@
+{
+  "provider_id": "cartesia-ink",
+  "dataset_id": "core-en-tts-v1",
+  "track": "stt",
+  "started_at_utc": "2026-08-25T16:09:34+00:00",
+  "harness_version": "0.1.0",
+  "dataset_git_sha": "0a978439be7a",
+  "turns": [
+    {
+      "turn_id": "turn_001",
+      "reference": "The quick brown fox jumps over the lazy dog",
+      "transcript": " The quick brown fox jumps over the lazy dog.",
+      "wer": 0.0,
+      "ttft_ms": null,
+      "finalize_ms": 94.29,
+      "tags": []
+    },
+    {
+      "turn_id": "turn_002",
+      "reference": "Welcome to ErzyCall how can I help you today",
+      "transcript": " Welcome to Erzy Call. How can I help you today?",
+      "wer": 0.2222,
+      "ttft_ms": null,
+      "finalize_ms": 299.6,
+      "tags": []
+    },
+    {
+      "turn_id": "turn_003",
+      "reference": "Please hold while I transfer your call to the billing department",
+      "transcript": " Please hold while I transfer your call to the billing department.",
+      "wer": 0.0,
+      "ttft_ms": null,
+      "finalize_ms": -2.38,
+      "tags": []
+    },
+    {
+      "turn_id": "turn_004",
+      "reference": "Your appointment is confirmed for Tuesday March fourth at ten thirty",
+      "transcript": " Your appointment is confirmed for Tuesday, March 4th.  at 10:30.",
+      "wer": 0.2727,
+      "ttft_ms": null,
+      "finalize_ms": -878.95,
+      "tags": []
+    },
+    {
+      "turn_id": "turn_005",
+      "reference": "I need to reschedule my delivery to the downtown office",
+      "transcript": " I need to reschedule my delivery to the downtown office.",
+      "wer": 0.0,
+      "ttft_ms": null,
+      "finalize_ms": 301.58,
+      "tags": []
+    },
+    {
+      "turn_id": "turn_006",
+      "reference": "Can you repeat the total amount due on this invoice",
+      "transcript": " Can you repeat the total amount due on this invoice?",
+      "wer": 0.0,
+      "ttft_ms": null,
+      "finalize_ms": 92.73,
+      "tags": []
+    },
+    {
+      "turn_id": "turn_007",
+      "reference": "Thank you for calling have a great day",
+      "transcript": " Thank you for calling. Have a great day.",
+      "wer": 0.0,
+      "ttft_ms": null,
+      "finalize_ms": 95.21,
+      "tags": []
+    },
+    {
+      "turn_id": "turn_008",
+      "reference": "My phone number is five five five zero one two three",
+      "transcript": " My phone number is five.  One, two, three.",
+      "wer": 0.2727,
+      "ttft_ms": null,
+      "finalize_ms": -4872.51,
+      "tags": []
+    }
+  ]
+}

@@ -58,9 +58,11 @@ async def run_turn(provider: BaseProvider, turn: Turn, record: RunRecord) -> dic
                     pass
             await asyncio.sleep(CHUNK_MS / 1000)
         t_silence = now_ms()
+        # Silence marker must precede finalize events, else finalize latency
+        # can go negative when the vendor commits during streaming.
+        queue.put_nowait(("__silence__", t_silence))  # type: ignore[assignment]
         async for ev in provider.finalize():
             queue.put_nowait(ev)
-        queue.put_nowait(("__silence__", t_silence))  # type: ignore[assignment]
         queue.put_nowait(None)  # end-of-turn sentinel
 
     feed_task = asyncio.create_task(feeder())

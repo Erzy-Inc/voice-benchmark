@@ -1,0 +1,82 @@
+{
+  "provider_id": "soniox-stt-rt-v5",
+  "dataset_id": "core-en-tts-v1",
+  "track": "stt",
+  "started_at_utc": "2026-08-25T16:08:39+00:00",
+  "harness_version": "0.1.0",
+  "dataset_git_sha": "0a978439be7a",
+  "turns": [
+    {
+      "turn_id": "turn_001",
+      "reference": "The quick brown fox jumps over the lazy dog",
+      "transcript": "The  qu ick  b rown  fo x  jum ps  over  the  la zy  dog . <end>",
+      "wer": 1.2222,
+      "ttft_ms": null,
+      "finalize_ms": 358.56,
+      "tags": []
+    },
+    {
+      "turn_id": "turn_002",
+      "reference": "Welcome to ErzyCall how can I help you today",
+      "transcript": "Wel com e  to  Ur zi C all .  How  can  I  hel p  y ou  tod ay ? <end>",
+      "wer": 1.5556,
+      "ttft_ms": null,
+      "finalize_ms": 348.33,
+      "tags": []
+    },
+    {
+      "turn_id": "turn_003",
+      "reference": "Please hold while I transfer your call to the billing department",
+      "transcript": "P le ase  hold  while  I  transfer  y our  call  to  the  bill ing  depart ment . <end>",
+      "wer": 0.9091,
+      "ttft_ms": null,
+      "finalize_ms": 351.51,
+      "tags": []
+    },
+    {
+      "turn_id": "turn_004",
+      "reference": "Your appointment is confirmed for Tuesday March fourth at ten thirty",
+      "transcript": "Your  ap point ment  is  conf ir med  for  Tu es d ay,  March  4 ,  at  1 0 : 3 0 . <end>",
+      "wer": 1.4545,
+      "ttft_ms": null,
+      "finalize_ms": 449.04,
+      "tags": []
+    },
+    {
+      "turn_id": "turn_005",
+      "reference": "I need to reschedule my delivery to the downtown office",
+      "transcript": "I  ne ed  to  res ch ed ule  my  del iver y  to  the  down t own  offic e. <end>",
+      "wer": 1.5,
+      "ttft_ms": null,
+      "finalize_ms": 369.24,
+      "tags": []
+    },
+    {
+      "turn_id": "turn_006",
+      "reference": "Can you repeat the total amount due on this invoice",
+      "transcript": "Can  y ou  re pe at  the  total  am o unt  due  on  this  in vo ice ? <end>",
+      "wer": 1.2,
+      "ttft_ms": null,
+      "finalize_ms": 434.39,
+      "tags": []
+    },
+    {
+      "turn_id": "turn_007",
+      "reference": "Thank you for calling have a great day",
+      "transcript": "Th ank  y ou  for  call ing.  H ave  a  gre at  day . <end>",
+      "wer": 1.375,
+      "ttft_ms": null,
+      "finalize_ms": 333.59,
+      "tags": []
+    },
+    {
+      "turn_id": "turn_008",
+      "reference": "My phone number is five five five zero one two three",
+      "transcript": "My  ph one  number  is  5 5 5  0 1 1  2 3 . <end>",
+      "wer": 1.0,
+      "ttft_ms": null,
+      "finalize_ms": -147.69,
+      "tags": []
+    }
+  ]
+}

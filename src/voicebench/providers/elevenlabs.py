@@ -52,7 +52,7 @@ class ElevenLabsScribeV2Realtime(BaseProvider):
         try:
             async for raw in self._ws:
                 msg = json.loads(raw)
-                mtype = msg.get("type")
+                mtype = msg.get("message_type")
                 if mtype == "partial_transcript":
                     if msg.get("text"):
                         self._events.put_nowait(
@@ -73,10 +73,16 @@ class ElevenLabsScribeV2Realtime(BaseProvider):
         finally:
             self._events.put_nowait(None)
 
-    async def _send_b64(self, pcm: bytes) -> None:
+    async def _send_b64(self, pcm: bytes, commit: bool = False) -> None:
         await self._ws.send(
-            json.dumps({"type": "input_audio_chunk",
-                         "audio_base64": base64.b64encode(pcm).decode()})
+            json.dumps(
+                {
+                    "message_type": "input_audio_chunk",
+                    "audio_base_64": base64.b64encode(pcm).decode(),
+                    "commit": commit,
+                    "sample_rate": 16000,
+                }
+            )
         )
 
     async def stream_audio(self, chunk: bytes) -> AsyncIterator[TranscriptEvent]:
