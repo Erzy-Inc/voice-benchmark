@@ -2,10 +2,10 @@
 
 | Provider | WER ↓ | Finalize p50 | Finalize p90 | TTFT p50 | TTFT p90 | Cost/1k min |
 | --- | --- | --- | --- | --- | --- | --- |
-| cartesia-ink | 91.39% | -26.71ms | 219.39ms | — | — | — |
-| soniox-stt-rt-v5 | 97.54% | 340.96ms | 416.56ms | — | — | — |
+| cartesia-ink | 91.78% | -26.71ms | 219.39ms | — | — | — |
+| soniox-stt-rt-v5 | 97.66% | 340.96ms | 416.56ms | — | — | — |
 | assemblyai-universal-3-5-pro | 100.0% | — | — | — | — | — |
 | deepgram-nova-3 | 100.0% | — | — | — | — | $4.30 |
 | elevenlabs-scribe-v2-realtime | 100.0% | — | — | — | — | — |
 
-_Auto-generated from results/ — do not edit. Runs: 86._
+_Auto-generated from results/ — do not edit. Runs: 90._
