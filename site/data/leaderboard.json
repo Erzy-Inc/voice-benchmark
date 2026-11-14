@@ -1,14 +1,14 @@
 [
   {
     "provider_id": "cartesia-ink",
-    "wer": 97.85,
+    "wer": 97.87,
     "finalize_p50_ms": -26.71,
     "finalize_p90_ms": 219.39,
     "ttft_p50_ms": null,
     "ttft_p90_ms": null,
     "cost_per_1k_min_usd": null,
-    "runs": 84,
-    "n_turns": 672
+    "runs": 85,
+    "n_turns": 680
   },
   {
     "provider_id": "soniox-stt-rt-v5",
@@ -18,8 +18,8 @@
     "ttft_p50_ms": null,
     "ttft_p90_ms": null,
     "cost_per_1k_min_usd": null,
-    "runs": 84,
-    "n_turns": 672
+    "runs": 85,
+    "n_turns": 680
   },
   {
     "provider_id": "assemblyai-universal-3-5-pro",
@@ -29,8 +29,8 @@
     "ttft_p50_ms": null,
     "ttft_p90_ms": null,
     "cost_per_1k_min_usd": null,
-    "runs": 13,
-    "n_turns": 104
+    "runs": 14,
+    "n_turns": 112
   },
   {
     "provider_id": "deepgram-nova-3",
@@ -40,8 +40,8 @@
     "ttft_p50_ms": null,
     "ttft_p90_ms": null,
     "cost_per_1k_min_usd": 4.3,
-    "runs": 82,
-    "n_turns": 656
+    "runs": 83,
+    "n_turns": 664
   },
   {
     "provider_id": "elevenlabs-scribe-v2-realtime",
@@ -51,7 +51,7 @@
     "ttft_p50_ms": null,
     "ttft_p90_ms": null,
     "cost_per_1k_min_usd": null,
-    "runs": 84,
-    "n_turns": 672
+    "runs": 85,
+    "n_turns": 680
   }
 ]
